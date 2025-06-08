@@ -1,36 +1,33 @@
-# temp_conversion_tool.py
+CELSIUS_TO_FAHRENHEIT_FACTOR = 9/5
 
-# Define global conversion factors
-FAHRENHEIT_TO_CELSIUS_FACTOR = 5 / 9
-CELSIUS_TO_FAHRENHEIT_FACTOR = 9 / 5  # Explicitly defined as required
-
-def convert_to_celsius(fahrenheit):
-    """
-    Convert Fahrenheit to Celsius using the global conversion factor.
-    """
-    return (fahrenheit - 32) * FAHRENHEIT_TO_CELSIUS_FACTOR
-
-def convert_to_fahrenheit(celsius):
-    """
-    Convert Celsius to Fahrenheit using the global conversion factor.
-    """
+def celsius_to_fahrenheit(celsius):
     return (celsius * CELSIUS_TO_FAHRENHEIT_FACTOR) + 32
 
-def main():
-    try:
-        temperature = float(input("Enter the temperature to convert: "))
-        unit = input("Is this temperature in Celsius or Fahrenheit? (C/F): ").strip().upper()
+def fahrenheit_to_celsius(fahrenheit):
+    return (fahrenheit - 32) / CELSIUS_TO_FAHRENHEIT_FACTOR
 
-        if unit == "F":
-            converted_temp = convert_to_celsius(temperature)
-            print(f"{temperature}°F is {converted_temp:.2f}°C")
-        elif unit == "C":
-            converted_temp = convert_to_fahrenheit(temperature)
-            print(f"{temperature}°C is {converted_temp:.2f}°F")
+def display_menu():
+    print("Temperature Conversion Tool")
+    print("1. Celsius to Fahrenheit")
+    print("2. Fahrenheit to Celsius")
+    print("3. Exit")
+
+def main():
+    while True:
+        display_menu()
+        choice = input("Choose an option (1-3): ").strip()
+
+        if choice == '1':
+            c = float(input("Enter temperature in Celsius: "))
+            print(f"{c}°C = {celsius_to_fahrenheit(c):.2f}°F")
+        elif choice == '2':
+            f = float(input("Enter temperature in Fahrenheit: "))
+            print(f"{f}°F = {fahrenheit_to_celsius(f):.2f}°C")
+        elif choice == '3':
+            print("Exiting program.")
+            break
         else:
-            print("Error: Invalid unit. Please enter 'C' for Celsius or 'F' for Fahrenheit.")
-    except ValueError:
-        print("Error: Invalid temperature. Please enter a numeric value.")
+            print("Invalid choice. Please select 1, 2, or 3.")
 
 if __name__ == "__main__":
     main()
